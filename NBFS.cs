@@ -34,19 +34,21 @@ public class NBFSNetConsole
 {
     public static void Main(string[] argv)
     {
-        if (argv.Length == 2)
+        if (argv.Length == 1)
         {
             try
             {
                 NBFSNet NBFS = new NBFSNet();
+                
+                string data = Console.ReadLine();
 
                 if (argv[0].ToLower().Equals("encode"))
                 {
-                    Console.WriteLine(Convert.ToBase64String(NBFS.EncodeBinaryXML(System.Text.ASCIIEncoding.ASCII.GetString(Convert.FromBase64String(argv[1])))));
+                    Console.WriteLine(Convert.ToBase64String(NBFS.EncodeBinaryXML(System.Text.ASCIIEncoding.ASCII.GetString(Convert.FromBase64String(data)))));
                 }
                 else
                 {
-                    Console.WriteLine(Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(NBFS.DecodeBinaryXML(Convert.FromBase64String(argv[1])))));
+                    Console.WriteLine(Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(NBFS.DecodeBinaryXML(Convert.FromBase64String(data)))));
                 }
             }
             catch (Exception e)
@@ -56,7 +58,7 @@ public class NBFSNetConsole
         }
         else
         {
-            Console.WriteLine("Usage: NBFS [encode|decode] Base64Data\n\nNOTE: All output, including exceptions, will be returned as a Base64 string.");
+            Console.WriteLine("Usage: NBFS [encode|decode]\n\nNOTE: All output, including exceptions, will be returned as a Base64 string.");
         }
     }
 }
